@@ -43,7 +43,7 @@ This project formulates **1D trajectory synthesis as a conditional generative pr
 - **Classifier-Free Guidance (CFG)**: Evaluates both conditioned $\mathbf{\epsilon}_\theta(\mathbf{x}_t, t, c, g)$ and unconditioned $\mathbf{\epsilon}_\theta(\mathbf{x}_t, t, \emptyset, \emptyset)$ passes to steer generation without requiring an explicit classifier network.
 
 ### 3. Synthetic Trajectory Benchmark Dataset (`src/dataset.py`)
-- Simulates realistic 1D kinematic trajectories with varying boundary constraints, endpoint goals $x_{\text{end}} \in [-1.0, 1.0]$, and noise disturbances.
+- Simulates realistic 1D kinematic trajectories with varying boundary constraints, endpoint goals withd and noise disturbances.
 
 ### 4. Interactive Research Dashboard (`app.py`)
 - Web interface allowing real-time trajectory visualization, dynamic target endpoint manipulation, and empirical study of Classifier-Free Guidance scale parameter $w$.
