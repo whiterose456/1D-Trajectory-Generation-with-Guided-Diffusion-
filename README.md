@@ -98,6 +98,35 @@ $$\hat{\mathbf{\epsilon}}_\theta(\mathbf{x}_t, t, c, g) = (1 + w) \mathbf{\epsil
 
 ---
 
+## 📊 Quantitative Evaluation
+
+After training a checkpoint, run the benchmark to compare generated trajectories across all three motion styles:
+
+```bash
+python evaluate.py --checkpoint checkpoints/guided_diffusion_1d.pt
+```
+
+The evaluator generates a batch for each style and writes `evaluation_results.csv`. It reports:
+
+| Metric | What it measures |
+|---|---|
+| Endpoint MAE | Average absolute distance between the final position and requested goal |
+| Acceleration RMS | Magnitude of second-order temporal changes; lower values generally indicate smoother motion |
+| Jerk RMS | Magnitude of third-order temporal changes; useful for examining abrupt changes in acceleration |
+| Mean absolute velocity | Average step-to-step displacement |
+| Diversity | Mean temporal standard deviation across generated samples; indicates variation within a style |
+| Finite fraction | Fraction of generated values that are finite |
+
+You can change the evaluation batch size, target, and guidance strength:
+
+```bash
+python evaluate.py --samples 64 --goal 0.5 --cfg-scale 2.5 --output results/benchmark.csv
+```
+
+These metrics are diagnostics, not proof of physical feasibility. In particular, endpoint error measures how closely the unconstrained sampler reaches the requested goal; it does not enforce a hard endpoint constraint.
+
+---
+
 ## 📚 References & Citation
 
 1. Janner, M., Du, Y., Tenenbaum, J. B., & Levine, S. (2022). *Planning with Diffusion for Sequential Decision Making*. International Conference on Machine Learning (ICML).
